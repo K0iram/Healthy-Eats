@@ -7,6 +7,7 @@ import {
 
 import AppLayout from './layout/main'
 import Home from './components/Home'
+import SignOut from './components/SignOut'
 import Danger from './components/Danger'
 
 
@@ -16,6 +17,7 @@ const Routes = () => (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/home" component={Home} />
+        <Route path="/signOut" component={SignOut} />
         <Route path="*" component={Danger} /> {/* Always keep this last in the routes */}
       </Switch>
     </AppLayout>
