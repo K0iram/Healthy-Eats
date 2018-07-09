@@ -3,20 +3,40 @@ const API = {}
 
 const store = require('../store');
 const config = {
-  // production: {
-  //   api: 'https://murmuring-depths-64110.herokuapp.com'
-  // },
+  production: {
+    api: 'https://hidden-spire-77972.herokuapp.com'
+  },
   development: {
-    api: 'http://localhost:3000'
+    api: 'http://localhost:4741'
   }
 }
 
 const origin = config[process.env.NODE_ENV].api
 
-API.signIn = function (data){
-  console.log(store)
+API.getMeals = function () {
   return axios({
-    url: origin + '/api/Users/login',
+    url: `${origin}/meals`,
+    method: 'GET',
+    headers: {
+      "Authorization": `Token token=${store.user.token}`
+    }
+  });
+};
+
+API.createMeal = function (data) {
+  return axios({
+    url: `${origin}/meals`,
+    method: 'POST',
+    headers: {
+      "Authorization": `Token token=${store.user.token}`
+    },
+    data,
+  });
+};
+
+API.signIn = function (data){
+  return axios({
+    url: `${origin}/sign-in`,
     method: 'POST',
     data,
   });
@@ -24,7 +44,7 @@ API.signIn = function (data){
 
 API.signUp = function (data){
   return axios({
-    url: `${origin}/api/Users`,
+    url: `${origin}/sign-up`,
     method: 'POST',
     data,
   });
@@ -42,12 +62,15 @@ API.changePassword = function (data) {
 };
 
 API.signOut = function () {
-  console.log(store)
   return axios({
-    url: `${origin}/api/Users/logout/?access_token=${store.user.id}`,
-    method: 'POST'
+    url: `${origin}/sign-out/${store.user.id}`,
+    method: 'DELETE',
+    headers: {
+      Authorization: `Token token=${store.user.token}`,
+    },
   });
 };
 
 
 export default API
+

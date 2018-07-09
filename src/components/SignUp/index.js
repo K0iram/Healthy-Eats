@@ -7,13 +7,10 @@ import './style.css'
 
 class SignUp extends Component {
   state = {
-    username: '',
     email: '',
-    password: ''
-  }
-
-  onUsernameChange = e => {
-    this.setState({username: e.target.value})
+    password: '',
+    password_confirmation: '',
+    registered: !!STORE.token
   }
 
   onEmailChange = e => {
@@ -22,6 +19,10 @@ class SignUp extends Component {
 
   onPasswordChange = e => {
     this.setState({password: e.target.value})
+  }
+
+   onPasswordConfChange = e => {
+    this.setState({password_confirmation: e.target.value})
   }
 
   isDisabled = () => {
@@ -33,9 +34,10 @@ class SignUp extends Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    let data = this.state
+  handleSubmit = (event) => {
+    event.preventDefault()
+    const { email, password, password_confirmation } = this.state
+    let data = {credentials: {email: email, password: password, password_confirmation: password_confirmation}}
 
     API.signUp(data).then(this.handleLogin)
       .catch((err) => {
@@ -44,22 +46,24 @@ class SignUp extends Component {
   }
 
   handleLogin = () => {
-    let data = {username: this.state.username, password: this.state.password}
+    let data = {credentials: {email: this.state.email, password: this.state.password}}
     API.signIn(data).then((res) => {
-      STORE.user = res.data.userId
-      STORE.token = res.data.id
-      window.localStorage.setItem('user', JSON.stringify(res.data))
+
+      STORE.user = res.data.user
+      STORE.token = res.data.user.token
+      window.localStorage.setItem('user', JSON.stringify(res.data.user))
       this.setState({registered: true})
+      console.log("Thank you for signing up")
     })
   }
 
   render() {
-    const {username, email, password} = this.state
+    const { email, password, password_confirmation} = this.state
     return (
       <div>
-        <input type="text" placeholder="Your Username" onChange={this.onUsernameChange} value={username}/>
         <input type="email" placeholder="Your Email" onChange={this.onEmailChange} value={email}/>
         <input type="password" placeholder="Choose a Password" onChange={this.onPasswordChange} value={password}/>
+        <input type="password" placeholder="Confirm your Password" onChange={this.onPasswordConfChange} value={password_confirmation}/>
         <button disabled={this.isDisabled()} onClick={this.handleSubmit}>Sign Up</button>
       </div>
     )

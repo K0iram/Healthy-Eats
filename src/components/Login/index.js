@@ -7,33 +7,38 @@ import './style.css'
 
 class Login extends Component {
   state = {
-    username: '',
-    password: ''
+    email: '',
+    password: '',
+    loggedIn: !!STORE.token
   }
 
-  onUsernameChange = e => {
-    this.setState({username: e.target.value})
+  onEmailChange = e => {
+    this.setState({email: e.target.value})
   }
 
   onPasswordChange = e => {
     this.setState({password: e.target.value})
   }
 
-  handleLogin = () => {
-    let data = {username: this.state.username, password: this.state.password}
-    API.signIn(data).then((res) => {
-      STORE.user = res.data.userId
-      STORE.token = res.data.id
-      window.localStorage.setItem('user', JSON.stringify(res.data))
-      console.log(STORE)
-    })
+  handleLogin = (e) => {
+    e.preventDefault()
+        let data = {credentials: {email: this.state.email, password: this.state.password}}
+        API.signIn(data).then((res) => {
+          STORE.user = res.data.user
+          STORE.token = res.data.user.token
+          window.localStorage.setItem('user', JSON.stringify(res.data.user))
+          this.setState({loggedIn: true})
+        })
+        .catch((err) => {
+          console.error(err)
+        })
   }
 
   render() {
     const { username, password } = this.state
     return (
       <div>
-        <input type="text" placeholder="Your Username" onChange={this.onUsernameChange} value={username}/>
+        <input type="text" placeholder="Your Email" onChange={this.onEmailChange} value={username}/>
         <input type="password" placeholder="Your Password" onChange={this.onPasswordChange} value = {password}/>
         <button onClick={this.handleLogin}>Login</button>
       </div>
