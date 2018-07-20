@@ -23,6 +23,16 @@ API.getMeals = function () {
   });
 };
 
+API.removeMeals = (id) => {
+  return axios({
+    url: `${origin}/meals/${id}`,
+    method: 'DELETE',
+    headers: {
+      "Authorization": `Token token=${store.user.token}`
+    }
+  });
+};
+
 API.createMeal = function (data) {
   return axios({
     url: `${origin}/meals`,
