@@ -86,16 +86,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-      { this.state.loggedIn &&
-        <div className="log-out">
-          <Link to="/signOut"><button>Log Out</button></Link>
-        </div>
-      }
-        <div className="login">
-          <Login/>
-          <SignUp/>
-        </div>
-
         <button onClick={this.getAllMeals}>Get Meals</button>
 
         <form onSubmit={this.postMeal}>

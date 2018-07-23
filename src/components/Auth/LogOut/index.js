@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import STORE from '../../store'
-import API from '../../API'
+import STORE from '../../../store'
+import API from '../../../API'
 
 class LogOut extends Component {
   componentWillMount() {
@@ -18,6 +18,7 @@ class LogOut extends Component {
 
   render() {
     return <Redirect to="/home"/>
+
   }
 }
 

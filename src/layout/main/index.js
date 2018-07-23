@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Nav from '../../components/Nav'
+import Navigation from '../../components/Navigation'
 
 import '../../css/skeleton.css'
 import './App.css'
@@ -10,7 +10,7 @@ class AppLayout extends Component {
     render() {
       return (
         <div className="App">
-          <Nav/>
+          <Navigation/>
           <div className="main-content">
             { this.props.children }
           </div>
