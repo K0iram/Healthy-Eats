@@ -50,13 +50,13 @@ class ChangePass extends Component {
         <TextField
             floatingLabelText="Password"
             type="password"
-            required="required"
+            required={true}
             onChange={this.handlePassChange}
             value={this.state.password}/>
         <TextField
             floatingLabelText="Password Confirmation"
             type="password"
-            required="required"
+            required={true}
             onChange={this.handlePassConfirmChange}
             value={this.state.password_confirmation}/>
           <div>

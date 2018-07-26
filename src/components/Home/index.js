@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import moment from 'moment'
-import Login from "../Login"
-import SignUp from "../SignUp"
-import SignOut from "../SignOut"
 import MealsTable from '../MealsTable'
 
 import API from '../../API'

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import STORE from '../../store'
 
 import Navigation from '../../components/Navigation'
 
@@ -10,7 +11,7 @@ class AppLayout extends Component {
     render() {
       return (
         <div className="App">
-          <Navigation/>
+          <Navigation isAuth={!!STORE.token}/>
           <div className="main-content">
             { this.props.children }
           </div>

@@ -24,13 +24,8 @@ const styles = {
   },
 }
 
-const dude = () => (
-  <Button>Test</Button>
-)
-
 class MenuAppBar extends React.Component {
   state = {
-    auth: !!window.localStorage.length,
     anchorEl: null,
   }
 
@@ -48,17 +43,17 @@ class MenuAppBar extends React.Component {
 
   render() {
     const { classes } = this.props
-    const { auth, anchorEl } = this.state
+    const { anchorEl } = this.state
     const open = Boolean(anchorEl)
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" iconElementRight={dude}>
+        <AppBar position="static">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
               Healthy Eats
             </Typography>
-            {auth ? (
+            {this.props.isAuth ? (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
