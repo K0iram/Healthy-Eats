@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom'
 import API from '../../../API'
 import STORE from '../../../store'
-import TextField from '@material-ui/core/TextField';
+import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button';
 import './style.css'
 
@@ -48,25 +48,36 @@ class SignIn extends Component {
         <h2>Sign In</h2>
 
           <form className='sign-in' onSubmit={this.handleSubmit}>
-            <TextField
-                floatingLabelText="Email"
-                type="email"
-                required="required"
-                onChange={this.handleEmailChange}
-                value={this.state.email}/>
-              <TextField
-                  floatingLabelText="Password"
-                  type="password"
-                  required="required"
-                  onChange={this.handlePassChange}
-                  value={this.state.password}/>
-                <br/>
-              <div>
-                <Button label="Submit" primary={true} style={style} type="submit" value="Submit"/>
-              </div>
-              <footer>
-                <p> Don't have an account? Please <Link to="/signup">Sign Up!</Link></p>
-              </footer>
+            <Input
+              className="auth__input"
+              placeholder="Your Email"
+              inputProps={{
+                'aria-label': 'Email',
+              }}
+              required="required"
+              onChange={this.handleEmailChange}
+              value={this.state.email}
+              type="email"
+            />
+            <Input
+              className="auth__input"
+              placeholder="Your Password"
+              inputProps={{
+                'aria-label': 'Password',
+              }}
+              required="required"
+              onChange={this.handlePassChange}
+              value={this.state.password}
+              type="password"
+            />
+            <div>
+            <Button variant="contained" color="primary" label="Submit" type="submit" value="Submit">
+            Submit
+            </Button>
+            </div>
+            <footer>
+              <p> Don't have an account? Please <Link to="/signup">Sign Up!</Link></p>
+            </footer>
           </form>
           <p> Don't want to save your finished stories? Go back <Link to="/home">home</Link> to keep playing!</p>
       </div>

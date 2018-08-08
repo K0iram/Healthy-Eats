@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import MealsTable from '../MealsTable'
+import Hero from '../Hero'
 
 import API from '../../API'
 import STORE from '../../store'
@@ -80,7 +81,7 @@ class Home extends Component {
   feelingValues = [1,2,3,4,5,6,7,8,9,10]
 
   render() {
-    return (
+    return this.state.loggedIn ? (
       <div>
         <button onClick={this.getAllMeals}>Get Meals</button>
 
@@ -101,6 +102,8 @@ class Home extends Component {
         }
         <h4>{this.state.message}</h4>
       </div>
+    ):(
+      <Hero/>
     )
   }
 }

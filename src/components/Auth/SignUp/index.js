@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import API from '../../../API'
 import STORE from '../../../store'
 import TextField from '@material-ui/core/TextField'
+import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button';
 
 import './style.css'
@@ -61,28 +62,45 @@ handleLogin = () => {
         <h2>Sign Up</h2>
 
           <form className='sign-up' onSubmit={this.handleSubmit}>
-                <TextField
-                    floatingLabelText="Email"
-                    type="email"
-                    required="required"
-                    onChange={this.handleEmailChange}
-                    value={this.state.email}/>
-                <TextField
-                    floatingLabelText="Password"
-                    type="password"
-                    required="required"
-                    onChange={this.handlePassChange}
-                    value={this.state.password}/>
-                <TextField
-                    floatingLabelText="Password Confirmation"
-                    type="password"
-                    required="required"
-                    onChange={this.handlePassConfirmChange}
-                    value={this.state.password_confirmation}/>
-              <div>
-                <Button variant="outlined" label="Submit" primary={true} style={style} type="submit" value="Submit"/>
-              </div>
-              <p> Already have an account? Please <Link to="/signin">Login here!</Link></p>
+            <Input
+              className="auth__input"
+              placeholder="Your Email"
+              inputProps={{
+                'aria-label': 'Email',
+              }}
+              required="required"
+              onChange={this.handleEmailChange}
+              value={this.state.email}
+              type="email"
+            />
+            <Input
+              className="auth__input"
+              placeholder="Choose a Password"
+              inputProps={{
+                'aria-label': 'Password',
+              }}
+              required="required"
+              onChange={this.handlePassChange}
+              value={this.state.password}
+              type="password"
+            />
+            <Input
+              className="auth__input"
+              placeholder="Confirm Your Password"
+              inputProps={{
+                'aria-label': 'Password Confirmation',
+              }}
+              required="required"
+              onChange={this.handlePassConfirmChange}
+              value={this.state.password_confirmation}
+              type="password"
+            />
+            <div>
+              <Button variant="contained" color="primary" label="Submit" type="submit" value="Submit">
+                Submit
+              </Button>
+            </div>
+            <p> Already have an account? Please <Link to="/signin">Login here!</Link></p>
           </form>
       </div>
     );
