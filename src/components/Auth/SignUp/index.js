@@ -2,16 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import API from '../../../API'
 import STORE from '../../../store'
-import TextField from '@material-ui/core/TextField'
 import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button';
 
 import './style.css'
-
-
-const style = {
-  margin: 12,
-};
 
 class SignUp extends Component {
   state = {

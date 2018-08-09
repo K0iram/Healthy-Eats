@@ -3,7 +3,7 @@ import STORE from '../../store'
 
 import Navigation from '../../components/Navigation'
 
-import '../../css/skeleton.css'
+// import '../../css/skeleton.css'
 import './App.css'
 
 class AppLayout extends Component {

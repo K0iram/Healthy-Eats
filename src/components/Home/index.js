@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import MealsForm from '../MealsForm'
 import MealsTable from '../MealsTable'
 import Hero from '../Hero'
+import Button from '@material-ui/core/Button';
 
 import API from '../../API'
 import STORE from '../../store'
@@ -11,9 +13,6 @@ import './style.css'
 
 class Home extends Component {
   state = {
-    title: "",
-    description: "",
-    feeling: 0,
     loggedIn: !!STORE.token,
     meals: [],
     isLoading: false,
@@ -41,32 +40,19 @@ class Home extends Component {
     })
   }
 
-  postMeal = (e) => {
-    e.preventDefault()
+  postMeal = (obj) => {
     this.setState({isLoading: true})
     let data = {
       meal: {
-        title: this.state.title,
-        description: this.state.description,
-        feeling: this.state.feeling,
+        title: obj.title,
+        description: obj.description,
+        feeling: obj.feeling,
         eaten_on: moment().format("YYYY-MM-DDTHH:mm:ss.SSS")
       }
     }
     API.createMeal(data).then((res) => {
       this.getAllMeals()
     })
-  }
-
-  onMealTitleChange = e => {
-    this.setState({title: e.target.value})
-  }
-
-  onMealDescriptionChange = e => {
-    this.setState({description: e.target.value})
-  }
-
-  onFeelingChange = e => {
-    this.setState({feeling: Number(e.target.value)})
   }
 
   onRemoveMeal = (id) => {
@@ -83,17 +69,15 @@ class Home extends Component {
   render() {
     return this.state.loggedIn ? (
       <div>
-        <button onClick={this.getAllMeals}>Get Meals</button>
-
-        <form onSubmit={this.postMeal}>
-          <input type="text" placeholder="Meal Title" onChange={this.onMealTitleChange}/>
-          <input type="text" placeholder="Meal description" onChange={this.onMealDescriptionChange}/>
-          <select onChange={this.onFeelingChange}>
-            <option value="default">How Did You Feel?</option>
-            {this.feelingValues.map((val, i) => <option value={val} key={i}>{val}</option>)}
-          </select>
-          <button>Submit</button>
-        </form>
+        <MealsForm postMeal={this.postMeal}/>
+        <Button
+          onClick={this.getAllMeals}
+          variant="contained"
+          className="meals-btn"
+          label="Get Meals"
+        >
+          Get Meals
+        </Button>
         {this.state.meals.length > 0 &&
           <MealsTable meals={this.state.meals} onDelete={this.onRemoveMeal}/>
         }
