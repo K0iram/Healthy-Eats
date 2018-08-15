@@ -64,6 +64,22 @@ class Home extends Component {
     })
   }
 
+  getAverage = () => {
+    const {meals} = this.state
+    // for(let i = 0; i >= meals.length; i++) {
+    //   const nums = []
+    //   nums.push(meals[i].feeling)
+    //   console.log(nums);
+    // }
+    // var sum = nums.reduce((a, b) => a + b, 0);\
+    const feelings = []
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    meals.forEach((meal) => feelings.push(meal.feeling))
+    console.log(feelings)
+    const averageFeeling = feelings.reduce(reducer)/feelings.length
+    return averageFeeling.toFixed(2)
+  }
+
   feelingValues = [1,2,3,4,5,6,7,8,9,10]
 
   render() {
@@ -85,6 +101,9 @@ class Home extends Component {
           <h2>LOADING...</h2>
         }
         <h4>{this.state.message}</h4>
+        {this.state.meals.length > 0 &&
+          <h5>Your Average Feeling is: {this.getAverage()}</h5>
+        }
       </div>
     ):(
       <Hero/>

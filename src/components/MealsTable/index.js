@@ -17,7 +17,7 @@ const MealsTable = (props) => {
   const { meals, onDelete } = props
   return (
     <div>
-      <Paper>
+      <Paper className="meals-table">
         <Table>
           <TableHead>
             <TableRow>
@@ -36,7 +36,7 @@ const MealsTable = (props) => {
                   <TableCell>{moment(meal.eaten_on).format('ll')}</TableCell>
                   <TableCell>{meal.description}</TableCell>
                   <TableCell numeric>{meal.feeling}</TableCell>
-                  <TableCell>
+                  <TableCell className='meals-table__cell'>
                     <Button variant="fab" color="secondary" aria-label="Edit">
                       <EditIcon/>
                     </Button>

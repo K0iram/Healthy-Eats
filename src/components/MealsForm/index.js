@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -44,17 +45,17 @@ class MealsForm extends Component {
   render() {
     const {title, description, feeling} = this.state
     return (
-      <div>
-        <form onSubmit={this.sendMeal} className="meal-form">
-          <FormControl>
+      <Paper className="meal-form">
+        <form onSubmit={this.sendMeal}>
+          <FormControl className="meal-form__input">
             <InputLabel htmlFor="meal-title">Meal Title</InputLabel>
             <Input id="meal-title" placeholder="Meal Title"value={title} onChange={this.onMealTitleChange} />
           </FormControl>
-          <FormControl>
+          <FormControl className="meal-form__input">
             <InputLabel htmlFor="meal-description">Meal Description</InputLabel>
             <Input id="meal-description" placeholder="Meal Description"value={description} onChange={this.onMealDescriptionChange} />
           </FormControl>
-          <FormControl>
+          <FormControl className="meal-form__input">
             <Select
               value={!feeling ? 'default' : feeling}
               onChange={this.onFeelingChange}
@@ -70,7 +71,7 @@ class MealsForm extends Component {
             Submit
           </Button>
         </form>
-      </div>
+      </Paper>
     )
   }
 }

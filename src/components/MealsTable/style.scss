@@ -1,5 +1,10 @@
-table {
-  max-width: 1160px;
+.meals-table {
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
+
+  &__cell {
+    display: flex !important;
+    justify-content: space-around !important;
+  }
 }
